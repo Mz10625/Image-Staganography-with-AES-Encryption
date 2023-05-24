@@ -11,3 +11,6 @@ Amount of data that can be encoded is dependent on image resolution. More data c
 Decoding :
 Software will produce a text file only if input image contains hidden data.
 If there is no encoded data in image file, output will not be produced after decoding.
+
+Time required for encoding and decoding varies based on size of text file.
+Approximate time required for encoding text file of 200KB is 10 minutes.
