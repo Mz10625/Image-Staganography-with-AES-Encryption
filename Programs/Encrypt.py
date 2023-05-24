@@ -223,7 +223,7 @@ class Encrypt_class():
                 statetable[j][i] = statetable[j][i]^key[j][i]
 
     def encrypt(self):
-        with open(self.msgfilename,'r') as msg:
+        with open(self.msgfilename,'r',errors='ignore') as msg:
             msg_content = msg.read()
         global encrypted_data
         encrypted_data = []

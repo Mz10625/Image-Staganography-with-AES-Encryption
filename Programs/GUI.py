@@ -4,7 +4,6 @@ from tkinter import filedialog as fd
 from tkinter.filedialog import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
-import customtkinter
 from tkinter.ttk import *
 from threading import Thread
 import time
@@ -19,24 +18,26 @@ class MainWindow(tk.Frame):
         self.width = self.master.winfo_screenwidth()
         self.height =self.master.winfo_screenheight()
         self.master.geometry("%dx%d" % (self.width,self.height))
-        self.frame = customtkinter.CTkFrame(master=None,width=self.width-200,height=self.height-200,fg_color="gray35")
+        self.frame = tk.Frame(master=None,width=self.width-200,height=self.height-200,bg="gray35")
         self.frame.place(relx=0.1,rely=0.1)
-        self.header1=customtkinter.CTkLabel(master=None,text="Image Steganography with AES Encryption",text_color="Deep sky blue",height=60,width=700,font=('Castellar',25))
-        self.header1.place(relx=0.17,rely=0.1)
-        self.info1=customtkinter.CTkLabel(master=None,text="Secure Encoding of data within Image file.",height=20,width=200,fg_color="gray35",text_color="white",font=('Aparajita',25))
-        self.info1.place(relx=0.2,rely=0.2)
-        self.info2=customtkinter.CTkLabel(master=None,text="1. Image file format required for Encoding - .jpeg",height=20,width=200,fg_color="gray35",text_color="white",font=('Aparajita',25))
-        self.info2.place(relx=0.2,rely=0.25)
-        self.info3=customtkinter.CTkLabel(master=None,text="2. The amount of data that can be encoded is based on image resolution.\n    Refer below given values for Encoding :",height=20,width=200,justify="left",fg_color="gray35",text_color="white",font=('Aparajita',25))
-        self.info3.place(relx=0.2,rely=0.3)
-        self.info4=customtkinter.CTkLabel(master=None,text="RESOLUTION\tDATA",fg_color="gray35",text_color="red",font=('Aparajita',25))
-        self.info4.place(relx=0.38,rely=0.4)
-        self.info5=customtkinter.CTkLabel(master=None,text="640 x 480\t   110 KB\n800 x 600\t   175 KB\n1024 x 768\t   288 KB\n1280 x 720\t   337 KB\n1280 x 960\t   450 KB\n1280 x 1024\t   480 KB\n1600 x 1200\t   703 KB\n1920 x 1080\t   760 KB\n2048 x 1536\t   1152 KB\n2560 x 1440\t   1349 KB",justify="left",fg_color="gray35",text_color="light blue",font=('Aparajita',20))
-        self.info5.place(relx=0.4,rely=0.45)
-        self.encodeb=customtkinter.CTkButton(master=None,text="Encode",height=40,width=80,command=self.Encode)
+        self.header1=tk.Label(master=None,text="Image Steganography with AES Encryption",bg="gray20",fg="Deep sky blue",font=('Castellar',20))
+        self.header1.place(relx=0.15,rely=0.1)
+        self.info1=tk.Label(master=None,text="Secure Encoding of data within Image file.",bg="gray35",fg="white",font=('Aparajita',17))
+        self.info1.place(relx=0.18,rely=0.2)
+        self.info2=tk.Label(master=None,text="1. Image file format required for Encoding - .jpeg",bg="gray35",fg="white",font=('Aparajita',17))
+        self.info2.place(relx=0.18,rely=0.25)
+        self.info6=tk.Label(master=None,text="2. Time required for encoding and decoding is based on size of message - (10 minutes for 200KB)",bg="gray35",fg="white",font=('Aparajita',17))
+        self.info6.place(relx=0.18,rely=0.3)
+        self.info3=tk.Label(master=None,text="3. The amount of data that can be encoded is based on image resolution.\n    Refer below given values for Encoding :",justify="left",bg="gray35",fg="white",font=('Aparajita',17))
+        self.info3.place(relx=0.18,rely=0.35)
+        self.info4=tk.Label(master=None,text="RESOLUTION\tDATA",bg="gray35",fg="red",font=('Aparajita',18))
+        self.info4.place(relx=0.38,rely=0.43)
+        self.info5=tk.Label(master=None,text="640 x 480\t   110 KB\n800 x 600\t   175 KB\n1024 x 768\t   288 KB\n1280 x 720\t   337 KB\n1280 x 960\t   450 KB\n1280 x 1024\t   480 KB\n1600 x 1200\t   703 KB\n1920 x 1080\t   760 KB\n2048 x 1536\t   1152 KB\n2560 x 1440\t   1349 KB",justify="left",bg="gray35",fg="light blue",font=('Aparajita',15))
+        self.info5.place(relx=0.4,rely=0.47)
+        self.encodeb=tk.Button(master=None,text="Encode",relief="flat",bg="cornflowerblue",fg="snow",height=2,width=8,command=self.Encode)
         self.encodeb.place(relx=0.3,rely=0.8)        
-        self.decodeb=customtkinter.CTkButton(master=None,text="Decode",height=40,width=80,command=self.Decode)
-        self.decodeb.place(relx=0.6,rely=0.8)
+        self.decodeb=tk.Button(master=None,text="Decode",relief="flat",bg="cornflowerblue",fg="snow",height=2,width=8,command=self.Decode)
+        self.decodeb.place(relx=0.62,rely=0.8)
 
     def Encode_to_home(self):
         self.buttonselect1.place_forget()
@@ -52,24 +53,26 @@ class MainWindow(tk.Frame):
             self.label2.place_forget()
         if(outputdestinationflag == 1):
             self.label5.place_forget()
-        self.frame = customtkinter.CTkFrame(master=None,width=self.width-200,height=self.height-200,fg_color="gray35")
+        self.frame = tk.Frame(master=None,width=self.width-200,height=self.height-200,bg="gray35")
         self.frame.place(relx=0.1,rely=0.1)
-        self.header1=customtkinter.CTkLabel(master=None,text="Image Steganography with AES Encryption",text_color="Deep sky blue",height=60,width=700,font=('Castellar',25))
-        self.header1.place(relx=0.17,rely=0.1)
-        self.info1=customtkinter.CTkLabel(master=None,text="Secure Encoding of data within Image file.",height=20,width=200,fg_color="gray35",text_color="white",font=('Centaur',20))
-        self.info1.place(relx=0.2,rely=0.2)
-        self.info2=customtkinter.CTkLabel(master=None,text="1. Image file format required for Encoding - .jpeg",height=20,width=200,fg_color="gray35",text_color="white",font=('Centaur',20))
-        self.info2.place(relx=0.2,rely=0.25)
-        self.info3=customtkinter.CTkLabel(master=None,text="2. The amount of data that can be encoded is based on image resolution.\n    Refer below given values for Encoding :",height=20,width=200,justify="left",fg_color="gray35",text_color="white",font=('Centaur',20))
-        self.info3.place(relx=0.2,rely=0.3)
-        self.info4=customtkinter.CTkLabel(master=None,text="RESOLUTION\tDATA",fg_color="gray35",text_color="red",font=('Aparajita',25))
-        self.info4.place(relx=0.38,rely=0.4)
-        self.info5=customtkinter.CTkLabel(master=None,text="640 x 480\t   110 KB\n800 x 600\t   175 KB\n1024 x 768\t   288 KB\n1280 x 720\t   337 KB\n1280 x 960\t   450 KB\n1280 x 1024\t   480 KB\n1600 x 1200\t   703 KB\n1920 x 1080\t   760 KB\n2048 x 1536\t   1152 KB\n2560 x 1440\t   1349 KB",justify="left",fg_color="gray35",text_color="light blue",font=('Aparajita',20))
-        self.info5.place(relx=0.4,rely=0.45)
-        self.encodeb=customtkinter.CTkButton(master=None,text="Encode",height=40,width=80,command=self.Encode)
+        self.header1=tk.Label(master=None,text="Image Steganography with AES Encryption",bg="gray20",fg="Deep sky blue",font=('Castellar',20))
+        self.header1.place(relx=0.15,rely=0.1)
+        self.info1=tk.Label(master=None,text="Secure Encoding of data within Image file.",bg="gray35",fg="white",font=('Aparajita',17))
+        self.info1.place(relx=0.18,rely=0.2)
+        self.info2=tk.Label(master=None,text="1. Image file format required for Encoding - .jpeg",bg="gray35",fg="white",font=('Aparajita',17))
+        self.info2.place(relx=0.18,rely=0.25)
+        self.info6=tk.Label(master=None,text="2. Time required for encoding and decoding is based on size of message - (10 minutes for 200KB)",bg="gray35",fg="white",font=('Aparajita',17))
+        self.info6.place(relx=0.18,rely=0.3)
+        self.info3=tk.Label(master=None,text="3. The amount of data that can be encoded is based on image resolution.\n    Refer below given values for Encoding :",justify="left",bg="gray35",fg="white",font=('Aparajita',17))
+        self.info3.place(relx=0.18,rely=0.35)
+        self.info4=tk.Label(master=None,text="RESOLUTION\tDATA",bg="gray35",fg="red",font=('Aparajita',18))
+        self.info4.place(relx=0.38,rely=0.43)
+        self.info5=tk.Label(master=None,text="640 x 480\t   110 KB\n800 x 600\t   175 KB\n1024 x 768\t   288 KB\n1280 x 720\t   337 KB\n1280 x 960\t   450 KB\n1280 x 1024\t   480 KB\n1600 x 1200\t   703 KB\n1920 x 1080\t   760 KB\n2048 x 1536\t   1152 KB\n2560 x 1440\t   1349 KB",justify="left",bg="gray35",fg="light blue",font=('Aparajita',15))
+        self.info5.place(relx=0.4,rely=0.47)
+        self.encodeb=tk.Button(master=None,text="Encode",relief="flat",bg="cornflowerblue",fg="snow",height=2,width=8,command=self.Encode)
         self.encodeb.place(relx=0.3,rely=0.8)        
-        self.decodeb=customtkinter.CTkButton(master=None,text="Decode",height=40,width=80,command=self.Decode)
-        self.decodeb.place(relx=0.6,rely=0.8)
+        self.decodeb=tk.Button(master=None,text="Decode",relief="flat",bg="cornflowerblue",fg="snow",height=2,width=8,command=self.Decode)
+        self.decodeb.place(relx=0.62,rely=0.8)
 
     def Decode_to_home(self):
         self.decode_backbutton.place_forget()
@@ -82,24 +85,26 @@ class MainWindow(tk.Frame):
         self.buttondecode.place_forget() 
         self.label4.place_forget()     
         self.msg_entry.place_forget()     
-        self.frame = customtkinter.CTkFrame(master=None,width=self.width-200,height=self.height-200,fg_color="gray35")
+        self.frame = tk.Frame(master=None,width=self.width-200,height=self.height-200,bg="gray35")
         self.frame.place(relx=0.1,rely=0.1)
-        self.header1=customtkinter.CTkLabel(master=None,text="Image Steganography with AES Encryption",text_color="Deep sky blue",height=60,width=700,font=('Castellar',25))
-        self.header1.place(relx=0.17,rely=0.1)
-        self.info1=customtkinter.CTkLabel(master=None,text="Secure Encoding of data within Image file.",height=20,width=200,fg_color="gray35",text_color="white",font=('Centaur',20))
-        self.info1.place(relx=0.2,rely=0.2)
-        self.info2=customtkinter.CTkLabel(master=None,text="1. Image file format required for Encoding - .jpeg",height=20,width=200,fg_color="gray35",text_color="white",font=('Centaur',20))
-        self.info2.place(relx=0.2,rely=0.25)
-        self.info3=customtkinter.CTkLabel(master=None,text="2. The amount of data that can be encoded is based on image resolution.\n    Refer below given values for Encoding :",height=20,width=200,justify="left",fg_color="gray35",text_color="white",font=('Centaur',20))
-        self.info3.place(relx=0.2,rely=0.3)
-        self.info4=customtkinter.CTkLabel(master=None,text="RESOLUTION\tDATA",fg_color="gray35",text_color="red",font=('Aparajita',25))
-        self.info4.place(relx=0.38,rely=0.4)
-        self.info5=customtkinter.CTkLabel(master=None,text="640 x 480\t   110 KB\n800 x 600\t   175 KB\n1024 x 768\t   288 KB\n1280 x 720\t   337 KB\n1280 x 960\t   450 KB\n1280 x 1024\t   480 KB\n1600 x 1200\t   703 KB\n1920 x 1080\t   760 KB\n2048 x 1536\t   1152 KB\n2560 x 1440\t   1349 KB",justify="left",fg_color="gray35",text_color="light blue",font=('Aparajita',20))
-        self.info5.place(relx=0.4,rely=0.45)
-        self.encodeb=customtkinter.CTkButton(master=None,text="Encode",height=40,width=80,command=self.Encode)
+        self.header1=tk.Label(master=None,text="Image Steganography with AES Encryption",bg="gray20",fg="Deep sky blue",font=('Castellar',20))
+        self.header1.place(relx=0.15,rely=0.1)
+        self.info1=tk.Label(master=None,text="Secure Encoding of data within Image file.",bg="gray35",fg="white",font=('Aparajita',17))
+        self.info1.place(relx=0.18,rely=0.2)
+        self.info2=tk.Label(master=None,text="1. Image file format required for Encoding - .jpeg",bg="gray35",fg="white",font=('Aparajita',17))
+        self.info2.place(relx=0.18,rely=0.25)
+        self.info6=tk.Label(master=None,text="2. Time required for encoding and decoding is based on size of message - (10 minutes for 200KB)",bg="gray35",fg="white",font=('Aparajita',17))
+        self.info6.place(relx=0.18,rely=0.3)
+        self.info3=tk.Label(master=None,text="3. The amount of data that can be encoded is based on image resolution.\n    Refer below given values for Encoding :",justify="left",bg="gray35",fg="white",font=('Aparajita',17))
+        self.info3.place(relx=0.18,rely=0.35)
+        self.info4=tk.Label(master=None,text="RESOLUTION\tDATA",bg="gray35",fg="red",font=('Aparajita',18))
+        self.info4.place(relx=0.38,rely=0.43)
+        self.info5=tk.Label(master=None,text="640 x 480\t   110 KB\n800 x 600\t   175 KB\n1024 x 768\t   288 KB\n1280 x 720\t   337 KB\n1280 x 960\t   450 KB\n1280 x 1024\t   480 KB\n1600 x 1200\t   703 KB\n1920 x 1080\t   760 KB\n2048 x 1536\t   1152 KB\n2560 x 1440\t   1349 KB",justify="left",bg="gray35",fg="light blue",font=('Aparajita',15))
+        self.info5.place(relx=0.4,rely=0.47)
+        self.encodeb=tk.Button(master=None,text="Encode",relief="flat",bg="cornflowerblue",fg="snow",height=2,width=8,command=self.Encode)
         self.encodeb.place(relx=0.3,rely=0.8)        
-        self.decodeb=customtkinter.CTkButton(master=None,text="Decode",height=40,width=80,command=self.Decode)
-        self.decodeb.place(relx=0.6,rely=0.8)
+        self.decodeb=tk.Button(master=None,text="Decode",relief="flat",bg="cornflowerblue",fg="snow",height=2,width=8,command=self.Decode)
+        self.decodeb.place(relx=0.62,rely=0.8)
     
     def openmsgfile(self):
         global msgfilename,msgflag
@@ -108,7 +113,7 @@ class MainWindow(tk.Frame):
         self.msgcount=self.msgcount+1
         msgfilename=StringVar()
         msgfilename=fd.askopenfilename(initialdir="/Desktop",title="select file",filetypes=(("text files","txt"),("all files","*.*"))) 
-        self.label1=customtkinter.CTkLabel(master=None,text=msgfilename)
+        self.label1=tk.Label(master=None,text=msgfilename,bg="grey20",fg="white",font=("Aparajita",17))
         self.label1.place(relx=0.35,rely=0.3) 
         if(msgfilename != ""):
             msgflag = 1
@@ -120,7 +125,7 @@ class MainWindow(tk.Frame):
         self.imgcount=self.imgcount+1
         imgfilename=StringVar()
         imgfilename=fd.askopenfilename(initialdir="/Desktop",title="select file",filetypes=(("jpeg,png files","*jpg *png"),("all files","*.*")))     
-        self.label2=customtkinter.CTkLabel(master=None,text=imgfilename)
+        self.label2=tk.Label(master=None,text=imgfilename,bg="grey20",fg="white",font=("Aparajita",17))
         self.label2.place(relx=0.35,rely=0.1)
         if(imgfilename != ""):
             imgflag = 1
@@ -132,7 +137,7 @@ class MainWindow(tk.Frame):
         output_directory_name=StringVar()
         self.outputdestinationcount=self.outputdestinationcount+1
         output_directory_name=fd.askdirectory(initialdir="/Desktop",title="Select Directory")
-        self.label5 = customtkinter.CTkLabel(master=None,text=output_directory_name)
+        self.label5 = tk.Label(master=None,text=output_directory_name,bg="grey20",fg="white",font=("Aparajita",17))
         self.label5.place(relx=0.35,rely=0.5)
         if(output_directory_name != ""):
             outputdestinationflag = 1
@@ -168,25 +173,27 @@ class MainWindow(tk.Frame):
         self.info3.place_forget()  
         self.info4.place_forget()  
         self.info5.place_forget()  
+        self.info6.place_forget()  
         self.imgcount = 0   
         self.msgcount = 0   
         self.outputdestinationcount = 0   
         self.encodeb.place_forget()
         self.decodeb.place_forget()
-        self.buttonselect2=customtkinter.CTkButton(master=None,text='Select image file',height=35,width=160,font=('Aparajita',22),command=self.openimgfile)
+        self.buttonselect2=tk.Button(master=None,text='Select image file',bg="cornflowerblue",fg="white",width=22,relief="flat",font=('Aparajita',15),command=self.openimgfile)
         self.buttonselect2.place(relx=0.1,rely=0.1)
-        self.buttonselect1=customtkinter.CTkButton(master=None,text='Select text file',height=35,width=160,font=('Aparajita',22),command=self.openmsgfile)
+        self.buttonselect1=tk.Button(master=None,text='Select text file',bg="cornflowerblue",fg="white",width=22,relief="flat",font=('Aparajita',15),command=self.openmsgfile)
         self.buttonselect1.place(relx=0.1,rely=0.3)  
-        self.output_destination_button=customtkinter.CTkButton(master=None,text='Output Destination',height=35,width=160,font=('Aparajita',22),command=self.output_directory)
+        self.output_destination_button=tk.Button(master=None,text='Output Destination',bg="cornflowerblue",fg="white",relief="flat",width=22,font=('Aparajita',15),command=self.output_directory)
         self.output_destination_button.place(relx=0.1,rely=0.5)
-        self.label3=customtkinter.CTkLabel(master=None,text="Enter output image file name",height=20,width=200,font=('Aparajita',23))
+        self.label3=tk.Label(master=None,text="Enter output image file name",bg="grey20",fg="white",width=22,font=('Aparajita',17))
         self.label3.place(relx=0.1,rely=0.7)
-        self.img_entry=customtkinter.CTkEntry(master=None,placeholder_text="E.g. MyText")
-        self.img_entry.place(relx=0.45,rely=0.7)
-        self.encode_backbutton=customtkinter.CTkButton(master=None,text="Back",height=40,width=80,command=self.Encode_to_home)
+        self.img_entry=tk.Entry(master=None)
+        self.img_entry.insert(0,"NewImage")
+        self.img_entry.place(relx=0.35,rely=0.7,width=180,height=25)
+        self.encode_backbutton=tk.Button(master=None,text="Back",bg="cornflowerblue",width=7,relief="flat",fg="white",font=('Aparajita',15),command=self.Encode_to_home)
         self.encode_backbutton.place(relx=0.8,rely=0.1)
-        self.buttonencode=customtkinter.CTkButton(master=None,text="Encode",height=40,width=80,hover_color="green4",command=self.begin_encode)
-        self.buttonencode.place(relx=0.4,rely=0.9)
+        self.buttonencode=tk.Button(master=None,text="Encode",relief="flat",fg="white",bg="green4",width=7,height=2,command=self.begin_encode)
+        self.buttonencode.place(relx=0.45,rely=0.85)
     
     def begin_decode(self):
         global outputmsgfilename
@@ -209,22 +216,24 @@ class MainWindow(tk.Frame):
         self.info3.place_forget()  
         self.info4.place_forget() 
         self.info5.place_forget() 
+        self.info6.place_forget() 
         self.imgcount = 0
         self.outputdestinationcount = 0 
         self.encodeb.place_forget()
         self.decodeb.place_forget()
-        self.decode_backbutton=customtkinter.CTkButton(master=None,text="Back",height=40,width=80,command=self.Decode_to_home)
+        self.decode_backbutton=tk.Button(master=None,text="Back",bg="cornflowerblue",width=7,relief="flat",fg="white",font=('Aparajita',15),command=self.Decode_to_home)
         self.decode_backbutton.place(relx=0.8,rely=0.1)
-        self.buttonselect3=customtkinter.CTkButton(master=None,text='Select image file',height=35,width=160,font=('Aparajita',22),command=self.openimgfile)
+        self.buttonselect3=tk.Button(master=None,text='Select image file',bg="cornflowerblue",fg="white",width=22,relief="flat",font=('Aparajita',15),command=self.openimgfile)
         self.buttonselect3.place(relx=0.1,rely=0.1)
-        self.label4=customtkinter.CTkLabel(master=None,text="Enter output text file name",height=30,width=200,font=('Aparajita',23))
+        self.label4=tk.Label(master=None,text="Enter output text file name",bg="grey20",fg="white",width=22,font=('Aparajita',17))
         self.label4.place(relx=0.1,rely=0.3)
-        self.output_destination_button=customtkinter.CTkButton(master=None,text='Output Destination',height=35,width=160,font=('Aparajita',22),command=self.output_directory)
+        self.output_destination_button=tk.Button(master=None,text='Output Destination',bg="cornflowerblue",fg="white",relief="flat",width=22,font=('Aparajita',15),command=self.output_directory)
         self.output_destination_button.place(relx=0.1,rely=0.5)
-        self.msg_entry=customtkinter.CTkEntry(master=None,placeholder_text="E.g. MyText")
-        self.msg_entry.place(relx=0.45,rely=0.3)
-        self.buttondecode=customtkinter.CTkButton(master=None,text="Decode",height=40,width=80,hover_color="green4",command=self.begin_decode)
-        self.buttondecode.place(relx=0.4,rely=0.7)
+        self.msg_entry=tk.Entry(master=None)
+        self.msg_entry.insert(0,"NewText")
+        self.msg_entry.place(relx=0.35,rely=0.3,width=180,height=25)
+        self.buttondecode=tk.Button(master=None,text="Decode",relief="flat",fg="white",bg="green4",width=7,height=2,command=self.begin_decode)
+        self.buttondecode.place(relx=0.45,rely=0.7)
 
 
 imgfilename = ""
@@ -236,7 +245,6 @@ imgflag = 0
 msgflag = 0
 outputdestinationflag = 0
 
-customtkinter.set_appearance_mode("dark")
 root = tk.Tk()
 root.configure(bg='grey20')
 root.title("Image Steganography")
